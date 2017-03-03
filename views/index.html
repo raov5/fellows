@@ -1,53 +1,70 @@
+<!--
+@author: Venky Rao raove@us.ibm.com
+
+-->
+
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Favorites Organizer powered by Cloudant</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no"/>
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<link rel="stylesheet" href="/style/style.css" />
+    <meta charset="utf-8">
+    <title>IBM Fellows</title>
+    <!-- link datatables css -->
+    <link rel="stylesheet" type="text/css" href="css/jquery.dataTables.css">
 </head>
 <body>
-	<div class = "container">
-	<div class = "banner">
-		<img class="newappIcon" src="images/newapp-icon.png">
-		<p class = "appTitle">
-			Favorites Organizer powered by Cloudant
-		</p>
-	</div>
+    <h1>IBM Fellows</h1>
+    <p>An IBM Fellow is an appointed position at IBM made by IBM’s CEO.  It is the highest honor a scientist, engineer, or programmer at IBM can achieve.  As of 2016, only 277 IBMers have earned the IBM Fellow distinction, and 98 of them remain active IBM employees.  IBM Fellows have generated 9,307 patents, <strong>received five Nobel prizes</strong>, thousands of government and professional citations and have a massive store of published research in scientific journals.</p>
+    <p>This webpage aims to provide information about IBM Fellows including their year of appointment and their area of expertise.</p><br>
+    <!--
+    <button id="showTable" class="button">Show Table</button>
+    <button id="hideList" class="button">Hide Table</button><br> -->
+    <table id="fellowsTable" class="display" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Appointment Year</th>
+                <th>Nationality</th>
+                <th>Expertise</th>
+                <th>Nobel Prize</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Appointment Year</th>
+                <th>Nationality</th>
+                <th>Expertise</th>
+                <th>Nobel Prize</th>
+            </tr>
+        </tfoot>
+    </table>
 
+    <!-- load jquery -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <!-- load datatables js library -->
+    <script type="text/javascript" src="js/jquery.dataTables.js"></script>
 
-	<section>
-		<table id='notes' class='records' border='0' cellspacing='0' cellpadding='0'><tbody></tbody></table>
-	</section>
-	<footer>
-		<div>
-			<!-- <button class='detailBtn' onclick="toggleServiceInfo()" title='Service information'>
-				<img src='images/detail.png' alt='detail'/>
-			-->
-			<button class="addBtn" onclick="addItem()" title="add record">
-				<img src="images/add.png" alt="add">
-			</button>
-			<br>
-			<a class = "infoImg" onclick="toggleAppInfo()">Help</a>
-		</div>
-		<div id='appinfo' class = 'appinfo' style='display: none;'>
-						This application helps you organize your favorite files.</br>
-						Supports all file types, like Audio, Video, Photos, Text etc.</br>
-						Click on Add icon to create a new category for your files. Provide a title and description for the category in the text fields.</br>
-						To add a file to a given category, Click on 'Browse' button to select a file, and 'Upload' button to upload the file.
-						To modify a title or description, Edit the text and press Enter.</br>
-						You can add multiple files (of any type) to a category.</br>
-						Click on <span class = 'deleteBtn' alt='delete'></span> icon to delete the category.
-		</div>
-		<div id="loadingImage"></div>
-		<br><br><br><br><br>
-		<div id="errorDiv" class='errorMsg'></div>
-	</footer>
-	<script type="text/javascript" src="/scripts/util.js"></script>
-	<script type="text/javascript" src="/scripts/index.js"></script>
-	<div id="myImage"><div id="innerImg"></div></div>
-	<br><br><br>
-	</div>
+    <!-- load button.js
+    <script type="text/javascript" src="js/button.js"></script> -->
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#fellowsTable').dataTable({
+            "ajax": "fellows.json",
+            "sAjaxDataProp": "fellows",
+            "aoColumns": [
+                {"mDataProp": "firstName"},
+                {"mDataProp": "lastName"},
+                {"mDataProp": "citationYear"},
+                {"mDataProp": "nationality"},
+                {"mDataProp": "expertiseArea"},
+                {"mDataProp": "nobelPrize"}
+            ]
+        });
+    });
+    </script>
 </body>
 </html>
